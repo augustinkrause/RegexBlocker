@@ -1,0 +1,10 @@
+{
+    "extension_name": {
+        "message": "Regex Blocker",
+        "description": "The display name for the extension."
+    },
+    "extension_description": {
+        "message": "This extension blocks websites based on JavaScript regular expressions.",
+        "description": "Description of what the extension does."
+    }
+}

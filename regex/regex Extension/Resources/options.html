@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>RegexBlocker Options</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding:20px;}
+    textarea{width:100%; height:160px; font-family:monospace; font-size:13px;}
+    button{margin-top:8px; padding:8px 12px; font-size:14px;}
+    .hint{color:#666; font-size:13px; margin-bottom:8px;}
+  </style>
+</head>
+<body>
+  <h1>RegexBlocker — Rules</h1>
+  <div class="hint">Enter one pattern per line. Examples: <code>/example\.com/i</code> or <code>badword</code></div>
+  <textarea id="patterns"></textarea>
+  <div>
+    <button id="save">Save</button>
+    <button id="clear">Clear</button>
+    <span id="status" style="margin-left:10px;"></span>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
+
