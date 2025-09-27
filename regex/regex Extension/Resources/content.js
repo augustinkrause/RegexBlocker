@@ -26,7 +26,46 @@
    function showBlockedNotice(reason) {
      try {
        // Clear the document content early:
-       document.documentElement.innerHTML = '';
+       document.documentElement.innerHTML = `
+         <!doctype html>
+         <html>
+         <head>
+           <meta charset="utf-8">
+           <title>Blocked by RegexBlocker</title>
+           <meta name="viewport" content="width=device-width,initial-scale=1">
+           <style>
+             body{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                  display:flex; align-items:center; justify-content:center; height:100vh; margin:0;
+                  background:#f8fafc; color:#111;}
+             .card{max-width:520px; padding:28px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.08);
+                   text-align:center; background:white;}
+             h1{margin:0 0 8px 0; font-size:20px;}
+             p{margin:0; color:#444;}
+             .small{margin-top:10px; font-size:12px; color:#888;}
+           </style>
+         </head>
+         <body>
+           <div class="card">
+             <h1>Page blocked</h1>
+             <p>This page was blocked by your RegexBlocker extension.</p>
+             <div class="small">${reason ? 'Rule: ' + reason : ''}</div>
+           </div>
+         </body>
+         </html>`;
+         // Apply styles inline instead of re-writing <head>
+         document.body.style.cssText = `
+           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           display:flex; align-items:center; justify-content:center; height:100vh; margin:0;
+           background:#f8fafc; color:#111;
+         `;
+
+         const card = document.querySelector(".card");
+         card.style.cssText = `
+           max-width:520px; padding:28px; border-radius:12px;
+           box-shadow:0 6px 18px rgba(0,0,0,0.08);
+           text-align:center; background:white;
+         `;
+         /*
        document.open();
        document.write(`
          <!doctype html>
@@ -55,6 +94,7 @@
          </body>
          </html>`);
        document.close();
+          */
      } catch (e) {
        // last resort: navigate to about:blank
        try { window.location.replace('about:blank'); } catch (_) {}

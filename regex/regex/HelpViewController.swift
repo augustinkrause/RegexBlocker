@@ -41,7 +41,7 @@ class HelpViewController: UIViewController {
         \\s  → any whitespace character
 
         Escaping:
-        Use double backslashes in Swift strings, e.g. "\\." matches a literal dot.
+        Use backslashes in your expressions, e.g. "\\." matches a literal dot.
 
         Flags:
         /regex/i   → case-insensitive

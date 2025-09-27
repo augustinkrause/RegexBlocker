@@ -159,7 +159,9 @@ class ViewController: UIViewController {
 
     func setupButtons() {
         saveButton.setTitle("Save", for: .normal)
+        saveButton.addTarget(self, action: #selector(savePatterns), for: .touchUpInside)
         clearButton.setTitle("Clear", for: .normal)
+        clearButton.addTarget(self, action: #selector(clearPatterns), for: .touchUpInside)
 
         // Put both buttons inside a horizontal stack
         let buttonStack = UIStackView(arrangedSubviews: [saveButton, clearButton])
@@ -181,12 +183,12 @@ class ViewController: UIViewController {
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         statusLabel.textColor = .gray
         statusLabel.font = UIFont.systemFont(ofSize: 14)
+        statusLabel.textAlignment = .center
         view.addSubview(statusLabel)
 
         NSLayoutConstraint.activate([
-            statusLabel.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
-            statusLabel.leadingAnchor.constraint(equalTo: clearButton.trailingAnchor, constant: 16),
-            statusLabel.trailingAnchor.constraint(lessThanOrEqualTo: textView.trailingAnchor)
+            statusLabel.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 12), // some spacing below buttons
+            statusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor) // horizontally centered
         ])
     }
 

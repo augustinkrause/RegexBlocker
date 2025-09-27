@@ -4,6 +4,14 @@ const status = document.getElementById('status');
 const saveBtn = document.getElementById('save');
 const clearBtn = document.getElementById('clear');
 
+browser.runtime.sendMessage({action: "getPasswordSaved"}).then(response => {
+    console.log(response);
+    if (response && response.passwordSaved) {
+        console.log(response);
+        lock();
+    }
+});
+
 function load() {
     browser.runtime.sendMessage({action: "getPasswordSaved"}).then(response => {
         console.log(response);
@@ -50,18 +58,22 @@ function save() {
     console.log("save");
   const lines = ta.value.split('\n').map(l => l.trim()).filter(Boolean);
     console.log(lines);
-  browser.runtime.sendMessage({action: "savePatterns", patterns: lines}).then( () => {
-    status.textContent = 'Saved';
-    setTimeout(() => status.textContent = '', 1500);
+  browser.runtime.sendMessage({action: "savePatterns", patterns: lines}).then( (response) => {
+      if (response.success){
+          status.textContent = 'Saved';
+          setTimeout(() => status.textContent = '', 1500);
+      }
   });
 }
 
 function clearAll() {
     console.log("clear");
-  ta.value = '';
-  browser.runtime.sendMessage({action: "savePatterns", patterns: []}).then( () => {
-    status.textContent = 'Cleared';
-    setTimeout(() => status.textContent = '', 1500);
+  browser.runtime.sendMessage({action: "savePatterns", patterns: []}).then( (response) => {
+      if (response.success){
+          ta.value = '';
+          status.textContent = 'Cleared';
+          setTimeout(() => status.textContent = '', 1500);
+      }
   });
 }
 
